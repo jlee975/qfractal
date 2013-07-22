@@ -1,0 +1,23 @@
+Can we calculate many pixels in parallel by using a center + offset approach?
+
+c = a + bi
+
+p(x) = q(x)z(x) + r(x)
+
+(p(x)^2)+x % z(x)
+
+(r(x)^2 + x) % z(x)
+
+z(x) = (x - c)(x - c')
+     = x^2 - (cx + c'x) + cc'
+     = x^2 - (2ax) + (a^2+b^2)
+
+r(x) = r1 x + r2
+
+r(x)^2 + x = r1^2 x^2 + 2r1r2 x + r2^2 + x
+	     r1^2 x^2 - (r1^2 2a x) + r1^2(a^2+b^2)
+	     2r1r2x + 2r1*r1 a x + r2^2 + x - r1*r1(a^2+b2)
+
+r'(x) = x(2 r1 r2 + 2r1 r1 a + 1) + (r2^2 - r1 a^2 - r1 b^2)
+
+
