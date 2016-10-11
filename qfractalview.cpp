@@ -126,7 +126,7 @@ void QFractalView::on_go_clicked()
 	m.orig.y = 0;
 	m.orig.scale = 0;
 
-	QByteArray b = QByteArray::fromHex(ui->label->text().toAscii());
+    QByteArray b = QByteArray::fromHex(ui->label->text().toLatin1());
 	if (b.length() == sizeof(m.bytes))
 	{
 		const char * q = b.constData();

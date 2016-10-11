@@ -45,30 +45,29 @@ int Mandelbrot::operator()(
 
 	const long cycle_begin = maxiter / 4;
 
-	std::complex<double> c(x,y);
-	std::complex<double> z = c; // hare
+    const std::complex<double> c(x,y);
+    std::complex<double> z = c;
+    std::complex<double> t;
 
-	for (long j = 0; j < cycle_begin; ++j)
-	{
-		if (std::abs(z.real()) + std::abs(z.imag()) >= 4)
-			return j;
+    /// @todo Duplicated code
+    for (long j = 0; j < maxiter; ++j)
+    {
+        if (std::abs(z) >= 2)
+            return j;
 
-		// 3 muls, 4 adds (ideally)
-		z = z * z + c;
-	}
+        z = std::pow(z, 2) + c;
 
-	// Look for a cycle
-	std::complex<double> t = z;
+        if (j == cycle_begin)
+        {
+            t = z;
+        }
+        else if (j > cycle_begin)
+        {
+            // Look for a cycle
+            if (std::abs(z - t) < eps)
+                return -1;
+        }
+    }
 
-	for (long j = cycle_begin; j < maxiter; ++j)
-	{
-		if (std::abs(z.real()) + std::abs(z.imag()) >= 4)
-			return j;
-		z = z * z + c;
-
-		if (std::abs(t.real() - z.real()) + std::abs(t.imag() - z.imag()) < eps)
-			return -1;
-
-	}
 	return -1;
 }
